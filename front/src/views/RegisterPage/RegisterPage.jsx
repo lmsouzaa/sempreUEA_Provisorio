@@ -647,7 +647,9 @@ class RegisterPage extends React.Component {
     this.file = evt.target.files[0];
     let readerFile = new FileReader();
 
+
     var fileReader = new FileReader();
+    /* ESSE BLOCO NÃO FUNCIONA */
     fileReader.onloadend = function(e) {
       var arr = (new Uint8Array(e.target.result)).subarray(0, 4);
       var header = "";
@@ -667,16 +669,19 @@ class RegisterPage extends React.Component {
         return;
       }    
     };
+
+    /* FIM DO BLOCO */
+
     fileReader.readAsArrayBuffer(this.file);
 
     readerFile.onload = (e) => {
+      console.log("imageURL ", e.target.result)
       this.setState({
         imageURL: e.target.result,
       });
-    };   
-
-} 
-
+    };
+    readerFile.readAsDataURL(this.file);
+  }  
   step0Validation(){
     if(this.cpfCanChange){
       if(this.state.cpf.length < 12){
