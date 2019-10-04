@@ -41,7 +41,7 @@ const navbarsStyle = theme => ({
       color: "inherit",
       textDecoration: "none",
       display: "flex",
-      //paddingTop: "0.75rem",
+      padding: "10 20px",
       margin: "0 !important",
       // background: "red",
       boxSizing: "border-box"
