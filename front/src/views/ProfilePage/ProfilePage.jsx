@@ -215,6 +215,9 @@ class ProfilePage extends React.Component {
                           <GridItem xs={12} sm={12} md={12}>
                             <p type='Lattes' ><strong>Linkedin: </strong><a href={this.state.linkedin}>{(this.state.linkedin == null? '-':this.state.linkedin)}</a></p>
                           </GridItem>
+                          <GridItem xs={12} sm={12} md={12}>
+                            <p type='Lattes' ><strong>Whatsapp: </strong><a href={"https://api.whatsapp.com/send?phone=" + this.state.whatsapp}>{(this.state.whatsapp == null? '-':this.state.whatsapp)}</a></p>
+                          </GridItem>
                         </GridContainer>
                       </GridItem>
                     </GridContainer>
