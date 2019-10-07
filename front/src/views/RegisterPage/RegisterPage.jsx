@@ -544,12 +544,15 @@ class RegisterPage extends React.Component {
 
   handleChangeCPF(evt) {
     if(this.cpfCanChange){
+
       if(evt.target.value.length < 14){
         this.validInputs.cpf = false;
       }else{
-        this.validInputs.cpf = true;
+        if(this.cpfOk(this.state.cpf)){
+            this.validInputs.cpf = true;
+        }
       }
-      
+
       if(evt.target.id === 'cpf'){
           let toAppend = '';
           if(this.state.cpf.length < evt.target.value.length){
@@ -564,6 +567,35 @@ class RegisterPage extends React.Component {
       }
     }
   }
+
+  cpfOk(strCPF){
+    var Soma;
+    var Resto;
+    var cont = 10;
+    Soma = 0;
+    var i;
+      if (strCPF == "000.000.000-0" || strCPF == "000.000.000-00") return false;
+
+      for (i=1; i<=11; i++){
+        if(i!=4 && i!=8) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
+      }
+      Resto = (Soma * 10) % 11;
+
+        if ((Resto == 10) || (Resto == 11))  Resto = 0;
+        if (Resto != parseInt(strCPF.substring(12, 13)) ) return false;
+        console.log(strCPF.substring(13, 14));
+
+      Soma = 0;
+      cont = 11;
+      for (i=1; i<=13; i++){
+        if(i!=4 && i!=8 && i!=12) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
+      }
+        Resto = (Soma * 10) % 11;
+
+        if ((Resto == 10) || (Resto == 11))  Resto = 0;
+        if (Resto != parseInt(strCPF.substring(12, 13) ) ) return false;
+        return true;
+    }
 
   isANumber(str){
     let a = str[str.length-1];
