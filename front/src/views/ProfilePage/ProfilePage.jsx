@@ -207,16 +207,16 @@ class ProfilePage extends React.Component {
                       <GridItem xs={12} sm={12} md={6}>
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={12}>
-                            <p type='email' ><strong>Email: </strong><a href={'mailto:'+this.state.email}>{(this.state.email == null? '-':this.state.email)}</a></p>
+                            <p type='email' ><strong>Email: </strong><a href={'mailto:'+this.state.email} target={"_blank"}>{(this.state.email == null? '-':this.state.email)}</a></p>
                           </GridItem>
                           <GridItem xs={12} sm={12} md={12}>
-                            <p type='Lattes' ><strong>Lattes: </strong><a href={this.state.lattes}>{(this.state.lattes == null? '-':this.state.lattes)}</a></p>
+                            <p type='Lattes' ><strong>Lattes: </strong><a href={this.state.lattes} target={"_blank"}>{(this.state.lattes == null? '-':this.state.lattes)}</a></p>
                           </GridItem>
                           <GridItem xs={12} sm={12} md={12}>
-                            <p type='Lattes' ><strong>Linkedin: </strong><a href={this.state.linkedin}>{(this.state.linkedin == null? '-':this.state.linkedin)}</a></p>
+                            <p type='LinkedIn' ><strong>Linkedin: </strong><a href={this.state.linkedin} target={"_blank"}>{(this.state.linkedin == null? '-':this.state.linkedin)}</a></p>
                           </GridItem>
                           <GridItem xs={12} sm={12} md={12}>
-                            <p type='Lattes' ><strong>Whatsapp: </strong><a href={"https://api.whatsapp.com/send?phone=" + this.state.whatsapp}>{(this.state.whatsapp == null? '-':this.state.whatsapp)}</a></p>
+                            <p type='WhatsApp' ><strong>Whatsapp: </strong><a href={"https://api.whatsapp.com/send?phone=" + this.state.whatsapp} target={"_blank"}>{(this.state.whatsapp == null? '-':this.state.whatsapp)}</a></p>
                           </GridItem>
                         </GridContainer>
                       </GridItem>

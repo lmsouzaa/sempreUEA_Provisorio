@@ -148,30 +148,31 @@ class LoginPage extends React.Component {
         })
         .then(function(response){
           if(response.status == 200){
-            return response.json();
+            response.json()
+            
+            .then(data => {
+                if(data.canLogin){
+                    sessionStorage.setItem('jwtToken', data.token);
+                    this.props.history.push('/profile-page');
+                        
+                } else{
+                    this.setState({
+                      openBottom:true,
+                      titleErro:'Dados Incorretos',
+                      messageErro:'Verifique as CPF e Senha e tente novamente'
+                    });
+                }
+              });
           }else{
             this.setState({
               openBottom:true,
-              titleErro:'Erro no Sistema',
-              messageErro:'O sistema pode estar temporariamente fora do ar, tente novamente mais tarde'
+              titleErro:'Dados Incorretos',
+              messageErro:'Verifique as CPF e Senha e tente novamente'
             });
           }
-        })
-        .then(data => {            
-            if(data.canLogin){
-                    sessionStorage.setItem('jwtToken', data.token);
-                    this.props.history.push('/profile-page');
-                    
-                } else{
-                  this.setState({
-                    openBottom:true,
-                    titleErro:'Dados Incorretos',
-                    messageErro:'Verifique as CPF e Senha e tente novamente'
-                  });
-                }
-            })  
+        }.bind(this))
+         
         .catch((e) => {
-                
                 this.setState({
                   openBottom:true,
                   titleErro:'Erro no Sistema',
