@@ -207,7 +207,7 @@ class ProfilePage extends React.Component {
                       <GridItem xs={12} sm={12} md={6}>
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={12}>
-                            <p type='email' ><strong>Email: </strong><a href={'mailto:'+this.state.email} target={"_blank"}>{(this.state.email == null? '-':this.state.email)}</a></p>
+                            <p type='email' ><strong>Email: </strong><p href={'mailto:'+this.state.email} target={"_blank"}>{(this.state.email == null? '-':this.state.email)}</p></p>
                           </GridItem>
                           <GridItem xs={12} sm={12} md={12}>
                             <p type='Lattes' ><strong>Lattes: </strong><a href={this.state.lattes} target={"_blank"}>{(this.state.lattes == null? '-':this.state.lattes)}</a></p>
