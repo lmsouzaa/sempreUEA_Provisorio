@@ -52,15 +52,15 @@ class CardAluno extends React.Component {
                    </CardBody>
                    <CardFooter className={classes.cardFooter}>
                     
-                    <a href={this.state.aluno.linkedin}  justIcon link target="blank" className={classes.linkedinIconContainer}>
-                    {this.state.aluno.linkedin ? <img className={classes.linkedinIcon} src={linkedin}/>:<img className={classes.linkedinIconInactive} src={linkedin}/>}
+                    <a href={this.state.aluno.linkedin?this.state.aluno.linkedin:false} justIcon link target="blank" className={classes.linkedinIconContainer}>
+                      {this.state.aluno.linkedin ? <img className={classes.linkedinIcon} src={linkedin}/>:<img className={classes.linkedinIconInactive} src={linkedin}/>}
                     </a> 
-                    <a href={this.state.aluno.lattes}  justIcon link target="blank" className={classes.linkedinIconContainer}>
-                    {this.state.aluno.lattes ? <img className={classes.lattesIcon} src={lattes}/>:<img className={classes.lattesIconInactive} src={lattes}/>}
+                    <a href={this.state.aluno.lattes?this.state.aluno.lattes:false}  justIcon link target="blank" className={classes.linkedinIconContainer}>
+                      {this.state.aluno.lattes ? <img className={classes.lattesIcon} src={lattes}/>:<img className={classes.lattesIconInactive} src={lattes}/>}
                     </a> 
-                    <a href={this.state.aluno.facebook}  justIcon link target="blank" className={classes.linkedinIconContainer}>
-                    {this.state.aluno.facebook ? <img className={classes.linkedinIcon} src={facebook}/>:<img className={classes.linkedinIconInactive} src={facebook}/>}
-                    </a>                   
+                    <a href={this.state.aluno.facebook?this.state.aluno.facebook:false}  justIcon link target="blank" className={classes.linkedinIconContainer}>
+                      {this.state.aluno.facebook ? <img className={classes.linkedinIcon} src={facebook}/>:<img className={classes.linkedinIconInactive} src={facebook}/>}
+                    </a>                 
                    </CardFooter>
                  </Card>
                </GridItem>
