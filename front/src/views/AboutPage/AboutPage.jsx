@@ -274,7 +274,7 @@ class AboutPage extends React.Component {
               <GridItem xs={12} sm={12} md={6}>
               <div>
                 <h2 className={classes.title}>Sobre o Sempre UEA:</h2>
-                <h4>
+                <h4 className={classes.descriptionText}>
                 É certo que a Universidade Estadual do Amazonas, desde sua fundação, forma profissionais 
                 extremamente qualificados para atuar nas mais diversas áreas do mercado. Pensanso nisso, 
                 a equipe do LUDUS (Laboratório de Tecnologia, Inovação e Economia Criativa) e a formanda
