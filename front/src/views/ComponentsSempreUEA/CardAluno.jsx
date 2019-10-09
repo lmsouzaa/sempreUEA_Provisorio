@@ -31,6 +31,12 @@ class CardAluno extends React.Component {
         e.target.src = camera;
     }
 
+    validarURL(link){
+      var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+      console.log('',re.test(link),'-',link);
+      return re.test(link) && link.search('http')!=-1;
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -52,14 +58,14 @@ class CardAluno extends React.Component {
                    </CardBody>
                    <CardFooter className={classes.cardFooter}>
                     
-                    <a href={this.state.aluno.linkedin?this.state.aluno.linkedin:false} justIcon link target="blank" className={classes.linkedinIconContainer}>
-                      {this.state.aluno.linkedin ? <img className={classes.linkedinIcon} src={linkedin}/>:<img className={classes.linkedinIconInactive} src={linkedin}/>}
+                    <a href={this.validarURL(this.state.aluno.linkedin)?this.state.aluno.linkedin:false} justIcon link target="blank" className={classes.linkedinIconContainer}>
+                      {this.validarURL(this.state.aluno.linkedin) ? <img className={classes.linkedinIcon} src={linkedin}/>:<img className={classes.linkedinIconInactive} src={linkedin}/>}
                     </a> 
-                    <a href={this.state.aluno.lattes?this.state.aluno.lattes:false}  justIcon link target="blank" className={classes.linkedinIconContainer}>
-                      {this.state.aluno.lattes ? <img className={classes.lattesIcon} src={lattes}/>:<img className={classes.lattesIconInactive} src={lattes}/>}
+                    <a href={this.validarURL(this.state.aluno.lattes)?this.state.aluno.lattes:false}  justIcon link target="blank" className={classes.linkedinIconContainer}>
+                      {this.validarURL(this.state.aluno.lattes) ? <img className={classes.lattesIcon} src={lattes}/>:<img className={classes.lattesIconInactive} src={lattes}/>}
                     </a> 
-                    <a href={this.state.aluno.facebook?this.state.aluno.facebook:false}  justIcon link target="blank" className={classes.linkedinIconContainer}>
-                      {this.state.aluno.facebook ? <img className={classes.linkedinIcon} src={facebook}/>:<img className={classes.linkedinIconInactive} src={facebook}/>}
+                    <a href={this.validarURL(this.state.aluno.facebook)?this.state.aluno.facebook:false}  justIcon link target="blank" className={classes.linkedinIconContainer}>
+                      {this.validarURL(this.state.aluno.facebook)? <img className={classes.linkedinIcon} src={facebook}/>:<img className={classes.linkedinIconInactive} src={facebook}/>}
                     </a>                 
                    </CardFooter>
                  </Card>
