@@ -3,6 +3,9 @@ import { primaryColor } from "assets/jss/material-kit-react.jsx";
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.jsx";
 
 const aboutPageStyle = {
+  descriptionText: {
+    fontWeight: "400",
+  },
   container: {
     zIndex: "12",
     color: "#FFFFFF",

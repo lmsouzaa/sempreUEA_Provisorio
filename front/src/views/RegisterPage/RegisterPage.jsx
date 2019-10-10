@@ -427,11 +427,9 @@ class RegisterPage extends React.Component {
   }
   handleChangeEntryYear(evt) {
 
-    if(evt.target.value.length < 4){
+    if(! (parseInt(this.state.entryYear)>=1960 && parseInt(this.state.entryYear)<2600)){ //#modifiquei
       this.validInputs.entryYear = false;
-    }else{
-      this.validInputs.entryYear = true;
-    }
+    } else this.validInputs.entryYear = true;
     
     if(evt.target.id === 'entry_year'){
       if(this.isANumber(evt.target.value) || this.state.entryYear.length > evt.target.value.length){
@@ -443,11 +441,9 @@ class RegisterPage extends React.Component {
   }
   handleChangeExitYear(evt) {
 
-    if(evt.target.value.length < 4 && evt.target.value.length !==0){
+    if(this.state.entryYear>this.state.exitYear){
       this.validInputs.exitYear = false;
-    }else{
-      this.validInputs.exitYear = true;
-    }
+    }else this.validInputs.exitYear = true;
 
     if(evt.target.id === 'exit_year'){
       if(this.isANumber(evt.target.value) || this.state.exitYear.length > evt.target.value.length){
