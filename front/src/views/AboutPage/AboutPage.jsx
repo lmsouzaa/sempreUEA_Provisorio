@@ -7,12 +7,12 @@ import './AboutPage.css';
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import Footer from "../ComponentsSempreUEA/Footer.jsx";
-import Button from "components/CustomButtons/Button.jsx";
+//import Button from "components/CustomButtons/Button.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import Navbar from "../ComponentsSempreUEA/Navbar";
-import Login from "../ComponentsSempreUEA/Login";
+//import Login from "../ComponentsSempreUEA/Login";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import Global from 'global';
@@ -275,10 +275,10 @@ class AboutPage extends React.Component {
               <div>
                 <h2 className={classes.title}>Sobre o Sempre UEA:</h2>
                 <h4>
-                É certo que a Universidade Estadual do Amazonas, desde sua fundação, forma profissionais 
-                extremamente qualificados para atuar nas mais diversas áreas do mercado. Pensanso nisso, 
-                a equipe do LUDUS (Laboratório de Tecnologia, Inovação e Economia Criativa) e a formanda
-                em Administração Luiza Falcone, tiveram a idéia de centralizar todos os alunos em   
+                 O Sempre UEA é uma plataforma onde os alunos e egressos
+                 da UEA podem compartilhar suas experiências após a faculdade. 
+                 Aqui você poderá conhecer alunos e ex-alunos e suas trajetórias, 
+                 e também pode compartilhar sua história com os outros colegas.
            
                 </h4>
                 <br />

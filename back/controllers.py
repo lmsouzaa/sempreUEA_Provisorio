@@ -4,7 +4,6 @@ import os
 import re
 import jwt
 import datetime
-import re
 import hashlib
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -196,6 +195,7 @@ def update_aluno(current_user):
     if regexPassword.match(data['password']) is not None:
         password = data['password']
     else:
+        # password = aluno.aluno_senha
         response = make_response(jsonify({'message': 'Nome inválido'}), 500)
         return response
 
