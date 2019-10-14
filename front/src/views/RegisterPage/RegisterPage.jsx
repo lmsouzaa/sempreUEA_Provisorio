@@ -405,12 +405,12 @@ class RegisterPage extends React.Component {
     var upper = 0;
     var digit = 0;
     for(var i=0; i<params.length; i++){
-      if(params[i] == '0' || params[i] == '1' || params[i] == '2' || params[i] == '3' || params[i] == '4' || params[i] == '5' || params[i] == '6' || params[i] == '7' || params[i] == '8' || params[i] == '9') digit = 1;
-      else if(params[i] == params[i].toLowerCase()) lower = 1;
-      else if(params[i] == params[i].toUpperCase()) upper = 1;
+      if(params[i] === '0' || params[i] === '1' || params[i] === '2' || params[i] === '3' || params[i] === '4' || params[i] === '5' || params[i] === '6' || params[i] === '7' || params[i] === '8' || params[i] === '9') digit = 1;
+      else if(params[i] === params[i].toLowerCase()) lower = 1;
+      else if(params[i] === params[i].toUpperCase()) upper = 1;
     }
     //console.log((lower + upper + digit) );
-    return ((lower + upper + digit) == 3);
+    return ((lower + upper + digit) === 3);
   }
 
   handleChangePasswordConfirm(evt) {
@@ -427,11 +427,9 @@ class RegisterPage extends React.Component {
   }
   handleChangeEntryYear(evt) {
 
-    if(evt.target.value.length < 4){
+    if(! (parseInt(this.state.entryYear)>=1960 && parseInt(this.state.entryYear)<2600)){ //#modifiquei
       this.validInputs.entryYear = false;
-    }else{
-      this.validInputs.entryYear = true;
-    }
+    } else this.validInputs.entryYear = true;
     
     if(evt.target.id === 'entry_year'){
       if(this.isANumber(evt.target.value) || this.state.entryYear.length > evt.target.value.length){
@@ -443,11 +441,9 @@ class RegisterPage extends React.Component {
   }
   handleChangeExitYear(evt) {
 
-    if(evt.target.value.length < 4 && evt.target.value.length !==0){
+    if(this.state.entryYear>this.state.exitYear){
       this.validInputs.exitYear = false;
-    }else{
-      this.validInputs.exitYear = true;
-    }
+    }else this.validInputs.exitYear = true;
 
     if(evt.target.id === 'exit_year'){
       if(this.isANumber(evt.target.value) || this.state.exitYear.length > evt.target.value.length){
@@ -558,13 +554,12 @@ class RegisterPage extends React.Component {
     }
       if(evt.target.value.length < 14){
         this.validInputs.cpf = false;
+        
       }else{
         if(this.isCPF(this.state.cpf)){
             this.validInputs.cpf = true;
         }
-      }
-
-      
+      }      
     }
   }
   isCPF(cpf){
@@ -579,10 +574,10 @@ class RegisterPage extends React.Component {
     var cont = 10;
     Soma = 0;
     var i;
-      if (strCPF == "000.000.000-0" || strCPF == "000.000.000-00") return false;
+      if (strCPF === "000.000.000-0" || strCPF === "000.000.000-00") return false;
 
       for (i=1; i<=11; i++){
-        if(i!=4 && i!=8) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
+        if(i!==4 && i!==8) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
       }
       Resto = (Soma * 10) % 11;
       console.log((strCPF));
@@ -593,18 +588,18 @@ class RegisterPage extends React.Component {
       Soma = 0;
       cont = 11;
       for (i=1; i<=13; i++){
-        if(i!=4 && i!=8 && i!=12) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
+        if(i!==4 && i!==8 && i!==12) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
       }
         Resto = (Soma * 10) % 11;
 
-        if ((Resto == 10) || (Resto == 11))  Resto = 0;
-        if (Resto != parseInt(strCPF.substring(12, 13) ) ) return false;
+        if ((Resto === 10) || (Resto === 11))  Resto = 0;
+        if (Resto !== parseInt(strCPF.substring(12, 13) ) ) return false;
         return true;
     }
 
   isANumber(str){
     let a = str[str.length-1];
-    if(a == '0' || a == '1' ||a == '2' ||a == '3' ||a == '4' ||a == '5' ||a == '6' ||a == '7' ||a == '8' ||a == '9') return true;
+    if(a === '0' || a === '1' ||a === '2' ||a === '3' ||a === '4' ||a === '5' ||a === '6' ||a === '7' ||a === '8' ||a === '9') return true;
     else return false;
   }
 
@@ -763,11 +758,11 @@ class RegisterPage extends React.Component {
       this.validInputs.entryYear = false;
       this.setState({entryYear:this.state.entryYear});
     }
-    if(this.state.unity == ''){
+    if(this.state.unity === ''){
       this.validInputs.unity = false;
       this.setState({unity:this.state.unity});
     }
-    if(this.state.course == ''){
+    if(this.state.course === ''){
       this.validInputs.course = false;
       this.setState({course:this.state.course});
     }
@@ -1313,7 +1308,7 @@ let professionalData = <CardBody className = {classes.cardBody}>
                         
 
     let voltar = null;
-    if(this.state.step != 0){
+    if(this.state.step !== 0){
       voltar = <Button disabled={this.state.step === 0? true:false} onClick={this.backStep.bind(this)} color="secondary" size="md" className={classes.buttonBack}>
         voltar
       </Button>
@@ -1379,7 +1374,7 @@ let professionalData = <CardBody className = {classes.cardBody}>
                       >
                         <Close className={classes.modalClose} />
                       </IconButton>
-                      <div><h4 className={[classes.modalTitle, (this.state.modalTitle == "Ops"? classes.danger:'')]}>{this.state.feedbackTitle}</h4></div>
+                      <div><h4 className={[classes.modalTitle, (this.state.modalTitle === "Ops"? classes.danger:'')]}>{this.state.feedbackTitle}</h4></div>
                     </DialogTitle>
                     <DialogContent
                       id="classic-modal-slide-description"

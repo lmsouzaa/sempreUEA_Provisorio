@@ -116,7 +116,7 @@ class HomePage extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={6}>
                 <h2 className={classes.title}>Bem Vindo ao Sempre UEA</h2>
-                <h4>
+                <h4 className={classes.descriptionText}>
                 O Sempre UEA é uma plataforma onde os alunos e egressos da UEA podem compartilhar
                 suas experiências após a faculdade. Aqui você poderá conhecer alunos e ex-alunos e
                 suas trajetórias, e também pode compartilhar sua história com os outros colegas

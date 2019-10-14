@@ -5,6 +5,7 @@ import HomePage from "views/HomePage/HomePage.jsx";
 import ProfilePage from "views/ProfilePage/ProfilePage.jsx";
 import ListPage from "views/ListPage/ListPage.jsx";
 import AboutPage from "views/AboutPage/AboutPage.jsx"
+//import EditPage from "../views/EditPage/EditPage.jsx";
 
 var indexRoutes = [
  
@@ -13,6 +14,8 @@ var indexRoutes = [
   { path: "/login", name: "LoginPage", component: LoginPage },
   { path: "/profile-page/:aluno", name: "Profile", component: ProfilePage },
   { path: "/profile-page", name: "Profile", component: ProfilePage },
+  //{ path: "/edit", name: "EditPage", component: EditPage },
+  
   // { path: "/components", name: "Components", component: Components },
   { path: "/home", name: "HomePage", component: HomePage },
   { path: "/list", name: "ListPage", component: ListPage },

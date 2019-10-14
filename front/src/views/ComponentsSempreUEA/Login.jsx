@@ -66,7 +66,8 @@ class LoginPage extends React.Component {
     }
 
     if(this.state.password.length < 6){
-      this.validInputs.password = false;
+      //this.validInputs.password = false;
+      this.validInputs.password = true; //aceitar senha vazia - teste
       this.setState({password:this.state.password});
     }
 
