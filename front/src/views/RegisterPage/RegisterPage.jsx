@@ -544,33 +544,38 @@ class RegisterPage extends React.Component {
 
   handleChangeCPF(evt) {
     if(this.cpfCanChange){
-
+      if(evt.target.id === 'cpf'){
+        let toAppend = '';
+        if(this.state.cpf.length < evt.target.value.length){
+          if(evt.target.value.length == 3 || evt.target.value.length == 7) toAppend = '.';
+          if(evt.target.value.length == 11) toAppend = '-';
+        }
+        if(this.isANumber(evt.target.value) || this.state.cpf.length > evt.target.value.length){
+          this.setState({
+              cpf : (evt.target.value + toAppend).substring(0,14)
+          });
+        }
+    }
       if(evt.target.value.length < 14){
         this.validInputs.cpf = false;
       }else{
-        if(this.cpfOk(this.state.cpf)){
+        if(this.isCPF(this.state.cpf)){
             this.validInputs.cpf = true;
         }
       }
 
-      if(evt.target.id === 'cpf'){
-          let toAppend = '';
-          if(this.state.cpf.length < evt.target.value.length){
-            if(evt.target.value.length == 3 || evt.target.value.length == 7) toAppend = '.';
-            if(evt.target.value.length == 11) toAppend = '-';
-          }
-          if(this.isANumber(evt.target.value) || this.state.cpf.length > evt.target.value.length){
-            this.setState({
-                cpf : (evt.target.value + toAppend).substring(0,14)
-            });
-          }
-      }
+      
     }
   }
-
+  isCPF(cpf){
+    if (cpf == "000.000.000-0" || cpf == "000.000.000-00") return false;
+    let re = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/;
+    return re.test(cpf);
+  }
   cpfOk(strCPF){
-    var Soma;
-    var Resto;
+    console.log(strCPF);
+    var Soma = 0;
+    var Resto = 0;
     var cont = 10;
     Soma = 0;
     var i;
@@ -580,11 +585,11 @@ class RegisterPage extends React.Component {
         if(i!=4 && i!=8) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
       }
       Resto = (Soma * 10) % 11;
-
+      console.log((strCPF));
         if ((Resto == 10) || (Resto == 11))  Resto = 0;
         if (Resto != parseInt(strCPF.substring(12, 13)) ) return false;
-        console.log(strCPF.substring(13, 14));
-
+        //console.log(strCPF.substring(13, 14));
+      
       Soma = 0;
       cont = 11;
       for (i=1; i<=13; i++){
