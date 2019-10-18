@@ -75,6 +75,7 @@ class RegisterPage extends React.Component {
     this.initValidInptus();
     // we use this to make the card to appear after the page has been rendered
     this.state = {
+      cpfValid: true,
       cardAnimaton: "cardHidden",
       step: 0,
       toggleSituationState:"desempregado",
@@ -209,7 +210,7 @@ class RegisterPage extends React.Component {
       entryYear:true,
       exitYear:true,
       unity:true,
-      course:true,
+      course:true, 
     }
 
   }
@@ -409,7 +410,6 @@ class RegisterPage extends React.Component {
       else if(params[i] === params[i].toLowerCase()) lower = 1;
       else if(params[i] === params[i].toUpperCase()) upper = 1;
     }
-    //console.log((lower + upper + digit) );
     return ((lower + upper + digit) === 3);
   }
 
@@ -537,65 +537,62 @@ class RegisterPage extends React.Component {
         });
     }
   }
-
   handleChangeCPF(evt) {
     if(this.cpfCanChange){
-      if(evt.target.id === 'cpf'){
+      if(evt.target.id === 'cpf'){ 
+        let cpfInput = evt.target.value;
+
+        let caracter = (cpfInput.length==3 || cpfInput.length==7)?'.':'-'; 
         let toAppend = '';
-        if(this.state.cpf.length < evt.target.value.length){
-          if(evt.target.value.length == 3 || evt.target.value.length == 7) toAppend = '.';
-          if(evt.target.value.length == 11) toAppend = '-';
+        if (this.state.cpf.length < evt.target.value.length){
+          toAppend =  (cpfInput.length==3 || cpfInput.length==7|| cpfInput.length==11)?caracter:'';
         }
+ 
         if(this.isANumber(evt.target.value) || this.state.cpf.length > evt.target.value.length){
           this.setState({
-              cpf : (evt.target.value + toAppend).substring(0,14)
+            cpf : (cpfInput + toAppend).substring(0,14)
+          }, () =>{
+            if(this.isCPF(this.state.cpf)){
+              this.validInputs.cpf = true;
+              this.setState({cpfValid:true})
+            }else {
+              this.setState({cpfValid:false})
+              tihs.validInputs.cpf = false;
+            }
           });
-        }
-    }
-      if(evt.target.value.length < 14){
-        this.validInputs.cpf = false;
-        
-      }else{
-        if(this.isCPF(this.state.cpf)){
-            this.validInputs.cpf = true;
-        }
-      }      
+        }        
+      }
     }
   }
+
   isCPF(cpf){
     if (cpf == "000.000.000-0" || cpf == "000.000.000-00") return false;
     let re = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/;
-    return re.test(cpf);
-  }
-  cpfOk(strCPF){
-    console.log(strCPF);
+
+    if(!re.test(cpf)) return false;
+    cpf = cpf.replace('.','').replace('.','').replace('-','');
     var Soma = 0;
     var Resto = 0;
-    var cont = 10;
-    Soma = 0;
     var i;
-      if (strCPF === "000.000.000-0" || strCPF === "000.000.000-00") return false;
-
-      for (i=1; i<=11; i++){
-        if(i!==4 && i!==8) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
-      }
-      Resto = (Soma * 10) % 11;
-      console.log((strCPF));
-        if ((Resto == 10) || (Resto == 11))  Resto = 0;
-        if (Resto != parseInt(strCPF.substring(12, 13)) ) return false;
-        //console.log(strCPF.substring(13, 14));
-      
-      Soma = 0;
-      cont = 11;
-      for (i=1; i<=13; i++){
-        if(i!==4 && i!==8 && i!==12) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (cont--);
-      }
-        Resto = (Soma * 10) % 11;
-
-        if ((Resto === 10) || (Resto === 11))  Resto = 0;
-        if (Resto !== parseInt(strCPF.substring(12, 13) ) ) return false;
-        return true;
+    
+    for (i=1; i<=9; i++){
+      Soma = Soma + parseInt(cpf.substring(i-1, i)) * (11-i);
     }
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(cpf.substring(9, 10)) ) return false;
+
+    Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+   
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(cpf.substring(10, 11) ) ) return false;
+    return true;
+
+  }
+
 
   isANumber(str){
     let a = str[str.length-1];
@@ -611,7 +608,7 @@ class RegisterPage extends React.Component {
 
   handleChangeEmail(evt) {
     //#modifiquei (
-    console.log(this.isEmail(evt.target.value));
+
     if(this.isEmail(evt.target.value)){
       this.validInputs.email = true;
     } else{
@@ -688,7 +685,7 @@ class RegisterPage extends React.Component {
       for(var i = 0; i < arr.length; i++) {
          header += arr[i].toString(16);
       }
-      console.log(header);
+
       if (header === "89504e47" || header === "47494638" || header === "ffd8ffe0" || header === "ffd8ffe1" || 
           header === "ffd8ffe2" || header === "ffd8ffe3" || header === "ffd8ffe8") {
             var file = this.file;
@@ -707,7 +704,7 @@ class RegisterPage extends React.Component {
     fileReader.readAsArrayBuffer(this.file);
 
     readerFile.onload = (e) => {
-      console.log("imageURL ", e.target.result)
+
       this.setState({
         imageURL: e.target.result,
       });
@@ -897,9 +894,11 @@ class RegisterPage extends React.Component {
 let authData = <CardBody className = {classes.cardBody}>
                         {this.cpfCanChange ?
                         <CustomInput
+                            
                             labelText="CPF *"
                             id="cpf"
-                            error = {!this.validInputs.cpf}
+                            //error = {!this.validInputs.cpf}
+                            error = {!this.state.cpfValid}
                             value={this.state.cpf}
                             formControlProps={{
                               fullWidth: true
@@ -935,6 +934,7 @@ let authData = <CardBody className = {classes.cardBody}>
                                 </InputAdornment>
                               )
                             }}
+                            
                           />
                           <p className = {classes.inputInfo}>Pelo menos 6 caracteres, uma letra maiúscula, uma letra minúscula e um dígito.</p>
                           
@@ -962,7 +962,7 @@ let authData = <CardBody className = {classes.cardBody}>
                             labelText="Nome Completo *"
                             id="name"
                             error = {!this.validInputs.name}
-                            value={this.state.name}
+                            value={this.state.nome}
                             formControlProps={{
                               fullWidth: true
                             }}

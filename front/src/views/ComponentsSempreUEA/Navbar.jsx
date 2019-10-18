@@ -109,21 +109,22 @@ class SectionNavbars extends React.Component {
       <div>
         <Header
               brandImage={
-              <Button onClick={this.goToHome.bind(this)} 
-              color="transparent"
-              className={classes.registerNavLink}
-              >
-              <img 
-                className={classes.brandImage} 
-                src={logo}>
-              </img></Button>}
+                <Button onClick={this.goToHome.bind(this)} 
+                color="transparent"
+                className={classes.registerNavLink}
+                >
+                <img 
+                  className={classes.brandImage} 
+                  src={logo}>
+                </img></Button>
+              }
               fixed
               rightLinks={
                 <List className={classes.list}>
                   <ListItem className={classes.listItem}>
                     <Button
                       onClick={this.goToHome.bind(this)}
-                      className={classes.registerNavLink}
+                      
                       color={this.state.page === "home"? "primary":"transparent"}>
                       Início
                     </Button>
