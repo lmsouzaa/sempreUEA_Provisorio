@@ -557,7 +557,7 @@ class RegisterPage extends React.Component {
               this.setState({cpfValid:true})
             }else {
               this.setState({cpfValid:false})
-              tihs.validInputs.cpf = false;
+              this.validInputs.cpf = false;
             }
           });
         }        
