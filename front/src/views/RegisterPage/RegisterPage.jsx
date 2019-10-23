@@ -75,7 +75,6 @@ class RegisterPage extends React.Component {
     this.initValidInptus();
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cpfValid: true,
       cardAnimaton: "cardHidden",
       step: 0,
       toggleSituationState:"desempregado",
@@ -114,6 +113,7 @@ class RegisterPage extends React.Component {
       // goPerfil: this.props.
     };
   }
+
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
 
@@ -427,28 +427,34 @@ class RegisterPage extends React.Component {
   }
   handleChangeEntryYear(evt) {
 
-    if(! (parseInt(this.state.entryYear)>=1960 && parseInt(this.state.entryYear)<2600)){ //#modifiquei
-      this.validInputs.entryYear = false;
-    } else this.validInputs.entryYear = true;
     
     if(evt.target.id === 'entry_year'){
       if(this.isANumber(evt.target.value) || this.state.entryYear.length > evt.target.value.length){
         this.setState({
             entryYear : evt.target.value.substring(0,4)
+        }, () => {
+          if(! (parseInt(this.state.entryYear)>=1960 && parseInt(this.state.entryYear)<2600)){ //#modifiquei
+            this.validInputs.entryYear = false;
+          } else this.validInputs.entryYear = true;
+          if(this.state.entryYear>this.state.exitYear){
+            this.validInputs.exitYear = false;
+          }else this.validInputs.exitYear = true;
+          this.forceUpdate(); 
         });
       }
     }
   }
   handleChangeExitYear(evt) {
 
-    if(this.state.entryYear>this.state.exitYear){
-      this.validInputs.exitYear = false;
-    }else this.validInputs.exitYear = true;
-
     if(evt.target.id === 'exit_year'){
-      if(this.isANumber(evt.target.value) || this.state.exitYear.length > evt.target.value.length){
+      if(this.isANumber(evt.target.value)){
         this.setState({
             exitYear : evt.target.value.substring(0,4)
+        }, () => {
+          if(this.state.entryYear>this.state.exitYear || this.state.entryYear==""){
+            this.validInputs.exitYear = false;
+          }else this.validInputs.exitYear = true;
+          this.forceUpdate();
         });
       }
     }
@@ -517,7 +523,7 @@ class RegisterPage extends React.Component {
   handleChangeDiscInstitution(evt) {
     if(evt.target.id === 'instituition'){
         this.setState({
-            institution : evt.target.value.substring(0,20)
+            institution : evt.target.value.substring(0,50)
         });
     }
   }
@@ -554,11 +560,10 @@ class RegisterPage extends React.Component {
           }, () =>{
             if(this.isCPF(this.state.cpf)){
               this.validInputs.cpf = true;
-              this.setState({cpfValid:true})
             }else {
-              this.setState({cpfValid:false})
               this.validInputs.cpf = false;
             }
+            this.forceUpdate(); 
           });
         }        
       }
@@ -608,18 +613,18 @@ class RegisterPage extends React.Component {
 
   handleChangeEmail(evt) {
     //#modifiquei (
-
+      if(evt.target.id === 'email'){
+        this.setState({
+            email : evt.target.value.substring(0,100)
+        });
+    }
     if(this.isEmail(evt.target.value)){
       this.validInputs.email = true;
     } else{
       this.validInputs.email = false;
     }
     // )
-    if(evt.target.id === 'email'){
-        this.setState({
-            email : evt.target.value.substring(0,100)
-        });
-    }
+    
     
   }
 
@@ -898,7 +903,7 @@ let authData = <CardBody className = {classes.cardBody}>
                             labelText="CPF *"
                             id="cpf"
                             //error = {!this.validInputs.cpf}
-                            error = {!this.state.cpfValid}
+                            error = {!this.validInputs.cpf}
                             value={this.state.cpf}
                             formControlProps={{
                               fullWidth: true
