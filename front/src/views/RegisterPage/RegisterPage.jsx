@@ -671,7 +671,7 @@ class RegisterPage extends React.Component {
     }
   }
   handleChangeWhatsapp(evt) {
-    if(evt.target.id === 'whatsapp' && this.isANumber(evt.target.value)){
+    if(evt.target.id === 'whatsapp(Número)' && this.isANumber(evt.target.value)){
         this.setState({
             whatsapp: evt.target.value.substring(0,15)
         });

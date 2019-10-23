@@ -174,7 +174,7 @@ const registerPageStyle = {
   },
   inputInfo:{
     marginTop: "-15px !important",
-    color: "#bbbbbb"
+    color: "#878787"
   }
 };
 

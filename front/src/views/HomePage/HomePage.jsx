@@ -67,7 +67,8 @@ class HomePage extends React.Component {
   render() {
     const { classes } = this.props;
     //const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-    
+
+
     let list = <div>
             <div className={classes.container}>
               <div className={classes.description}>
