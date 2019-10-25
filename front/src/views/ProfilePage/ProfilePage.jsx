@@ -175,8 +175,7 @@ class ProfilePage extends React.Component {
                 <GridItem xs={12} sm={12} md={6}>
                   <div className={classes.profile}>
                     <div>
-                      
-                      <img onError={this.handleError} src={Global.API_URL + '/imgs/uploads/' + this.state.id + '.jpeg?v=' + Date.now()} alt="..." className={classes.imageProfile} />
+                       <img id = "imageRotate" onError={this.handleError} src={Global.API_URL + '/imgs/uploads/' + this.state.id + '.jpeg?v=' + Date.now()} alt="..." className={classes.imageProfile} />
                     </div>
                     <div className={classes.name}>
                       <h3 className={classes.title}>{(this.state.name == null? '-':this.state.name)}</h3>
